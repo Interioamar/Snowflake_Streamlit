@@ -15,7 +15,8 @@ my_fruit_list=pd.read_csv('https://uni-lab-files.s3.us-west-2.amazonaws.com/dabw
 
 #my_fruit_list=my_fruit_list.set_index('Fruit')
 # Let's put a pick list here so they can pick the fruit they want to include 
-s1=st.multiselect("Pick some fruits:", list(my_fruit_list.Fruit),['Avocado','Banana'])
-fruits_t0_show=my_fruit_list.loc[s1]
+fruits_selected=st.multiselect("Pick some fruits:", list(my_fruit_list.index),['Avocado','Banana'])
+st.dataframe(fruits_selected)
+fruits_to_show = my_fruit_list.loc[fruits_selected]
 st.dataframe(fruits_t0_show)
 
