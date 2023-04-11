@@ -21,12 +21,12 @@ st.dataframe(fruits_selected)
 fruits_to_show = my_fruit_list.loc[fruits_selected]
 st.dataframe(fruits_to_show)
 
-st.header("Fruityvice Fruit Advice!")
+st.header("Fruityvice Fruit Advice!") #adds a header
 
-fruit_choice = st.text_input('What fruit would you like information about?','Kiwi')
-st.write('The user entered ', fruit_choice)
+fruit_choice = st.text_input('What fruit would you like information about?','Kiwi') #creates an input box for fruits with default value as kiwi
+st.write('The user entered ', fruit_choice) #creates an text with The user entered Kiwi/input
 
-fruityvice_response = requests.get("https://fruityvice.com/api/fruit/"+fruit_choice)
+fruityvice_response = requests.get("https://fruityvice.com/api/fruit/"+fruit_choice) #gets the request data through URL
 ## st.text(fruityvice_response.json())
 
 # write your own comment -what does the next line do? 
