@@ -3,6 +3,8 @@ import streamlit as st
 import numpy as np
 import pandas as pd
 import requests  #get an API call
+import snowflake.connector
+
 st.title("My New Healthy Diner")
 
 st.header('Breakfast Menu')
