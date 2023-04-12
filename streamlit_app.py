@@ -35,11 +35,14 @@ fruityvice_response = requests.get("https://fruityvice.com/api/fruit/"+fruit_cho
 fruityvice_normalized = pd.json_normalize(fruityvice_response.json()) #json_normalize -->> normalizes the json data into flat table
 st.dataframe(fruityvice_normalized) #displaying in dataframe 
 
-
-my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
+import streamlit
+my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
 my_cur = my_cnx.cursor()
-my_cur.execute("SELECT CURRENT_USER(), CURRENT_ACCOUNT(), CURRENT_REGION()")
+#my_cur.execute("SELECT CURRENT_USER(), CURRENT_ACCOUNT(), CURRENT_REGION()")
+my_cur.execute("select * from pc_rivery_db.public.fruit_load_list")
 my_data_row = my_cur.fetchone()
-st.text("Hello from Snowflake:")
+st.text("The fruit load list contains")
 st.text(my_data_row)
+
+
 
