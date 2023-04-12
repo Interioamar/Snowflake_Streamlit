@@ -46,7 +46,6 @@ st.dataframe(my_data_row)
 
 fruit_choice = st.text_input('What fruit would you like to add','jackfruit') #creates an input box for fruits with default value as kiwi
 st.write('Thanks for adding ', fruit_choice) #creates an text with The user entered Kiwi/input
-st.dataframe.append(fruit_choice)
 
 
 
