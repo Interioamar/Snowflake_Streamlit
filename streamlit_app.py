@@ -44,9 +44,9 @@ except URLError as e:
 
 st.header("The fruit load list contains")
 def get_full_fruits_load():
-  with my_cnx.cursor() as my_cur
-  my_cur.execute("select * from pc_rivery_db.public.fruit_load_list")
-  return my_cur.fetchall()
+  with my_cnx.cursor() as my_cur:
+    my_cur.execute("select * from pc_rivery_db.public.fruit_load_list")
+    return my_cur.fetchall()
 
 #Adding button to load the fruit
 if st.button('Get_fruit_list'):
