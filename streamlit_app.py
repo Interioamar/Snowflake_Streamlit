@@ -26,19 +26,19 @@ fruits_to_show = my_fruit_list.loc[fruits_selected]
 st.dataframe(fruits_to_show)
 
 st.header("Fruityvice Fruit Advice!") #adds a header
+def fruitvice_data(fruit_choice):
+  fruityvice_response = requests.get("https://fruityvice.com/api/fruit/"+fruit_choice) #gets the request data through URL
+  fruityvice_normalized = pd.json_normalize(fruityvice_response.json()) #json_normalize
+  return fruityvice_normalized
+
 try:
   fruit_choice = st.text_input('What fruit would you like information about?') #creates an input box for fruits with default value as kiwi
   if not fruit_choice:
     streamlit.error("Please select a fruit to get information")
   else:
     st.write('The user entered ', fruit_choice) #creates an text with The user entered Kiwi/input
-
-    fruityvice_response = requests.get("https://fruityvice.com/api/fruit/"+fruit_choice) #gets the request data through URL
-    ## st.text(fruityvice_response.json())
-
-    # write your own comment -what does the next line do? 
-    fruityvice_normalized = pd.json_normalize(fruityvice_response.json()) #json_normalize -->> normalizes the json data into flat table
-    st.dataframe(fruityvice_normalized) #displaying in dataframe 
+    get_fruit_function_data=fruitvice_data(fruit_choice)
+    st.dataframe(get_fruit_function_data) #displaying in dataframe 
 except URLError as e:
   streamlit.error()
 streamlit.stop()
