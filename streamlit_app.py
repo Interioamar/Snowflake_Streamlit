@@ -30,7 +30,7 @@ try:
   fruit_choice = st.text_input('What fruit would you like information about?') #creates an input box for fruits with default value as kiwi
   if not fruit_choice:
     streamlit.error("Please select a fruit to get information")
-   else:
+  else:
     st.write('The user entered ', fruit_choice) #creates an text with The user entered Kiwi/input
 
     fruityvice_response = requests.get("https://fruityvice.com/api/fruit/"+fruit_choice) #gets the request data through URL
@@ -40,7 +40,7 @@ try:
     fruityvice_normalized = pd.json_normalize(fruityvice_response.json()) #json_normalize -->> normalizes the json data into flat table
     st.dataframe(fruityvice_normalized) #displaying in dataframe 
 except URLError as e:
-streamlit.stop()
+  streamlit.stop()
 
 my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
 my_cur = my_cnx.cursor()
