@@ -4,6 +4,8 @@ import numpy as np
 import pandas as pd
 import requests  #get an API call
 import snowflake.connector
+import streamlit
+from urllib.error import URLError
 
 st.title("My New Healthy Diner")
 
@@ -35,7 +37,8 @@ fruityvice_response = requests.get("https://fruityvice.com/api/fruit/"+fruit_cho
 fruityvice_normalized = pd.json_normalize(fruityvice_response.json()) #json_normalize -->> normalizes the json data into flat table
 st.dataframe(fruityvice_normalized) #displaying in dataframe 
 
-import streamlit
+streamlit.stop()
+
 my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
 my_cur = my_cnx.cursor()
 #my_cur.execute("SELECT CURRENT_USER(), CURRENT_ACCOUNT(), CURRENT_REGION()")
@@ -45,14 +48,8 @@ my_data_row = my_cur.fetchall()
 
 st.text("The fruit load list contains")
 st.dataframe(my_data_row)
+
 fruit_choice = st.text_input('What fruit would you like to add','jackfruit') #creates an input box for fruits with default value as kiwi
 st.write('Thanks for adding ', fruit_choice) #creates an text with The user entered Kiwi/input
-
-
-
-
-
-
-
 
 
