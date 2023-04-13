@@ -41,18 +41,21 @@ try:
     st.dataframe(get_fruit_function_data) #displaying in dataframe 
 except URLError as e:
   streamlit.error()
+
+st.header("The fruit load list contains")
+def get_full_fruits_load():
+  with my_cnx.cursor() as my_cur
+  my_cur.execute("select * from pc_rivery_db.public.fruit_load_list")
+  return my_cur.fetchall()
+
+#Adding button to load the fruit
+if st.button('Get_fruit_list'):
+  my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
+  my_data_rows=get_full_fruits_load()
+  st.dataframe(my_data_row)
+
 streamlit.stop()
-my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
-my_cur = my_cnx.cursor()
-#my_cur.execute("SELECT CURRENT_USER(), CURRENT_ACCOUNT(), CURRENT_REGION()")
-my_cur.execute("insert into pc_rivery_db.public.fruit_load_list values('from_streamlit')")
-my_cur.execute("select * from pc_rivery_db.public.fruit_load_list")
-my_data_row = my_cur.fetchall()
-
-st.text("The fruit load list contains")
-st.dataframe(my_data_row)
-
 fruit_choice = st.text_input('What fruit would you like to add','jackfruit') #creates an input box for fruits with default value as kiwi
 st.write('Thanks for adding ', fruit_choice) #creates an text with The user entered Kiwi/input
-
+my_cur.execute("insert into pc_rivery_db.public.fruit_load_list values('from_streamlit')")
 
