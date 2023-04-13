@@ -54,8 +54,16 @@ if st.button('Get_fruit_list'):
   my_data_rows=get_full_fruits_load()
   st.dataframe(my_data_rows)
 
-streamlit.stop()
-fruit_choice = st.text_input('What fruit would you like to add','jackfruit') #creates an input box for fruits with default value as kiwi
-st.write('Thanks for adding ', fruit_choice) #creates an text with The user entered Kiwi/input
-my_cur.execute("insert into pc_rivery_db.public.fruit_load_list values('from_streamlit')")
+ #Allowing end user to add fruit
+def insert_fruit_name(new_fruit):
+  with my_cnx.cursor() as my_cur:
+    my_cur.execute("insert into pc_rivery_db.public.fruit_load_list values('from_streamlit')")
+    return 'Thanks for adding '+new_fruit
+  
+add_new_fruit = st.text_input('What fruit would you like to add','jackfruit') #creates an input box for fruits with default value as kiwi
+if st.button('Add new fruit'):
+  my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
+  back_from_function=insert_fruit_name(add_new_fruit)
+  st.text(back_from_function)
 
+streamlit.stop()
