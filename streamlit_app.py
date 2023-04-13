@@ -40,8 +40,8 @@ try:
     fruityvice_normalized = pd.json_normalize(fruityvice_response.json()) #json_normalize -->> normalizes the json data into flat table
     st.dataframe(fruityvice_normalized) #displaying in dataframe 
 except URLError as e:
-  streamlit.stop()
-
+  streamlit.error()
+streamlit.stop()
 my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
 my_cur = my_cnx.cursor()
 #my_cur.execute("SELECT CURRENT_USER(), CURRENT_ACCOUNT(), CURRENT_REGION()")
