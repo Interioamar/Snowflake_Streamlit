@@ -52,7 +52,7 @@ def get_full_fruits_load():
 if st.button('Get_fruit_list'):
   my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
   my_data_rows=get_full_fruits_load()
-  st.dataframe(my_data_row)
+  st.dataframe(my_data_rows)
 
 streamlit.stop()
 fruit_choice = st.text_input('What fruit would you like to add','jackfruit') #creates an input box for fruits with default value as kiwi
